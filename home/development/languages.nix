@@ -12,5 +12,7 @@
     cargo-machete
     # Java
     jdk21
+    # devenv
+    # haskellPackages.ghcup
   ];
 }

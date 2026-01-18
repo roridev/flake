@@ -2,8 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    ghostty
-    tmux
+    # ghostty
+    # tmux
     keepassxc
     zathura
     sublime-merge
@@ -18,11 +18,14 @@
 #    obs-studio
     nss
 #    anvil-editor
-#    zed-editor
+    zed-editor
     nh
     nixfmt-rfc-style
-    quodlibet-full
+#    quodlibet
+    bespokesynth
     nicotine-plus
+    inkscape
+    krita
 ];
   fonts.fontconfig.enable = true;
 }

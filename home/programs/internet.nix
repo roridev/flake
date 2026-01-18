@@ -3,8 +3,10 @@
 {
   home.packages = with pkgs; [
     firefox    
-#   discord
-    vesktop	
+#    chromium
+   discord
+#    vesktop
+#    equibop
     psst
     thunderbird
     qbittorrent

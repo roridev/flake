@@ -7,5 +7,6 @@
     ./internet.nix
     ./utilities.nix
     ./games.nix
+    ./xcompose.nix
   ];
 }

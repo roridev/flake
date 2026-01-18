@@ -5,10 +5,12 @@
     ../../modules/system.nix
     ./hardware-configuration.nix
 
+    # Audio Settings
+    # ./audio.nix
     # The window manager
     # Currently: KDE, Sway
     ../../modules/wm/kde.nix
-    ../../modules/wm/sway.nix
+    # ../../modules/wm/sway.nix
     ../../modules/navidrome.nix
   ];
 
@@ -31,13 +33,27 @@
   # ZRam
   zramSwap.enable = true;
 
+  # OpenTabletDriver
+  hardware.opentabletdriver.enable = true;
+  hardware.uinput.enable = true;
+
   # Swap File
   swapDevices = [
     {
       device = "/var/lib/swapfile";
-      size = 8 * 1024;
+      size = 16 * 1024;
     }
   ];
+
+  # Hybernate into swapfike.
+  boot.resumeDevice = "/var/lib/swapfile";
+
+  services.logind = {
+    # Laptop lid behaviour
+    lidSwitch = "poweroff";
+    lidSwitchExternalPower = "suspend-then-hibernate";
+    lidSwitchDocked = "ignore";
+  };
 
   # Networking
   networking.hostName = "ideapad-s145";
@@ -77,7 +93,10 @@
   time.timeZone = "America/Sao_Paulo";
 
   # Steam
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
 
   # Wine
   environment.systemPackages = with pkgs; [
@@ -100,7 +119,7 @@
     package = pkgs.emacs-gtk;
   };
 
-  services.tailscale.enable = true;
+  # services.tailscale.enable = true;
 
   services.openssh.enable = true;
 

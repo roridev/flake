@@ -61,6 +61,25 @@
           disabled = false;
           added_style = "#5BCEFA";
 	};
+      
+
+         ## JJ Custom Module
+         custom."jj_refs" = {
+            ignore_timeout = true;
+            description = "Jujutsu VCS Refs";
+            detect_folders = [".jj"];
+            command = '' jj log --revisions @ --no-graph --color always --template 'separate(" ", change_id.shortest(8), commit_id.shortest(8))'
+	              '';
+        };
+
+        custom."jj_immutable" = {
+            ignore_timout = true;
+            description = "Jujutsu VCS Immutable";
+            detect_folders = [".jj"];
+            style = "fg:grey";
+            command = '' jj log --revisions @ --no-graph --color never --template 'if(immutable,"")'
+                      '';
+        };
       };
     };
 }
