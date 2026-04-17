@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./fish.nix ./zsh.nix ./starlight.nix ];
+  imports = [ ./fish.nix ./starlight.nix ];
 
   programs.nix-your-shell.enable = true;
 }

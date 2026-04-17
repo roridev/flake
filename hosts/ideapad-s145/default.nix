@@ -8,20 +8,15 @@
     # Audio Settings
     # ./audio.nix
     # The window manager
-    # Currently: KDE, Sway
+    # Currently: KDE. 
+    ../../modules/wm/niri.nix
     ../../modules/wm/kde.nix
     # ../../modules/wm/sway.nix
-    ../../modules/navidrome.nix
+    # ../../modules/navidrome.nix
   ];
 
   # On this house we use sddm
-  services.displayManager.sddm = {
-    enable = true;
-    wayland = {
-      enable = true;
-      compositor = "kwin";
-    };
-  };
+
 
   # Bootloader
   boot.loader.systemd-boot.enable = true;
@@ -41,7 +36,7 @@
   swapDevices = [
     {
       device = "/var/lib/swapfile";
-      size = 16 * 1024;
+      size = 4 * 1024;
     }
   ];
 
@@ -57,9 +52,24 @@
 
   # Networking
   networking.hostName = "ideapad-s145";
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+	# queremos injustiça
+    plugins = with pkgs; [
+		networkmanager-openvpn
+    ];
+  };
   networking.firewall.allowedTCPPorts = [ 21 ];
   networking.firewall.allowedTCPPortRanges = [ { from = 51000; to = 51999; } ];
+
+  # Lets virtualize this sucker!
+  # programs.virt-manager.enable = true;
+  # users.groups.libvirtd.members = ["alikindsys"];
+  # virtualisation.libvirtd.enable = true;
+  # virtualisation.libvirtd.qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
+  # virtualisation.spiceUSBRedirection.enable = true;
+  # users.users.alikindsys.extraGroups = ["libvirtd"];
+  
 
   # FTP
   services.vsftpd = {
@@ -73,6 +83,8 @@
       pasv_max_port=51999
     '';
   };
+
+  services.power-profiles-daemon.enable = true;
 
   # Timezone and Locale
   i18n.defaultLocale = "en_US.UTF-8";
@@ -99,13 +111,13 @@
   };
 
   # Wine
-  environment.systemPackages = with pkgs; [
-    wineWowPackages.stable
-    aspell
-    aspellDicts.pt_BR
-    aspellDicts.en
-    aspellDicts.en-computers
-  ];
+#   environment.systemPackages = with pkgs; [
+#     wineWowPackages.stable
+#     aspell
+#     aspellDicts.pt_BR
+#     aspellDicts.en
+#     aspellDicts.en-computers
+#   ];
 
   # Keymaps
   services.xserver.xkb = {
@@ -119,7 +131,7 @@
     package = pkgs.emacs-gtk;
   };
 
-  # services.tailscale.enable = true;
+  services.tailscale.enable = true;
 
   services.openssh.enable = true;
 

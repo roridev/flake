@@ -8,5 +8,6 @@
     ./utilities.nix
     ./games.nix
     ./xcompose.nix
+    # ./niri.nix
   ];
 }

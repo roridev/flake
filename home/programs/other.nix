@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    # ghostty
+    ghostty
     # tmux
     keepassxc
     zathura
@@ -18,14 +18,15 @@
 #    obs-studio
     nss
 #    anvil-editor
-    zed-editor
+#    zed-editor
     nh
     nixfmt-rfc-style
 #    quodlibet
     bespokesynth
     nicotine-plus
     inkscape
-    krita
+	krita
+	anki
 ];
   fonts.fontconfig.enable = true;
 }

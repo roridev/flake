@@ -9,6 +9,10 @@
         gss = "git status --short";
         rebuild = "sudo nixos-rebuild switch";
         cat = "bat";
+        ls = "eza";
+	ll = "eza -l";
+	tree = "eza --tree";
+	nano = "micro";
     };
   };
 

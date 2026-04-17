@@ -4,7 +4,8 @@
   home.packages = with pkgs; [
     firefox    
 #    chromium
-   discord
+    discord
+#    cinny-desktop
 #    vesktop
 #    equibop
     psst

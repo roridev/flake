@@ -12,12 +12,26 @@ users.users.alikindsys = {
   shell = pkgs.fish;
 };
 
+nix.package = pkgs.lixPackageSets.stable.lix;
+
 # Add myself to the trusted users
 nix.settings.trusted-users = [ username ];
 
 nix.settings = {
   # Enable flakes globally.
   experimental-features = [ "nix-command" "flakes" ];
+
+  substituters = [
+    "https://cache.nixos.org"
+    "https://niri.cachix.org"
+    "https://vicinae.cachix.org"
+  ];
+
+  trusted-public-keys = [
+    "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
+    "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+  ];
 };
 
 # Garbage collection settings
@@ -62,6 +76,11 @@ services.pipewire = {
 # Docking
 virtualisation.docker.enable = true;
 
+services.mullvad-vpn = {
+  enable = true;
+  package = pkgs.mullvad-vpn;
+};
+
 # Latest Linux Kernel
 boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -86,11 +105,13 @@ fonts = {
 };
 
 environment.systemPackages = with pkgs; [
-  neovim
+  protonup-qt
   ripgrep
   fzf
   btop
   zsh
+  cachix
+  xwayland-satellite
 ];
 
 programs.zsh.enable = true;

@@ -21,6 +21,7 @@
     bat
     mpv
     piper
+    micro
     screenkey
     kdePackages.qtstyleplugin-kvantum
   ];
